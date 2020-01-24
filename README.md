@@ -6,7 +6,7 @@ community engagement application
 # User Story
 
 
-- User able to sign up or login (if the user already has an account, they can login, but if not then they can sign up)
+- User able to sign up or login (if the user already has an account, they can login, but if not then. they can sign up)
 - Once logged in, user can see the public feed with all of the 'roars' (tweets/ posts)
 - User can click on the communities link and see all of the communities there are 
 - User is able to join communities 
