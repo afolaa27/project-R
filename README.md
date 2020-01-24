@@ -18,7 +18,7 @@ community engagement application
 - User and user admin can go to their own profile page and change their username and see all of the communities they are in
 -The user admin also able to see all of the members they are an admin for and remove members (if members break any community rules)
 - Users can remove themselves from communities, but not able to remove other users
-- User is able to logout of account
+- User is able to log out of account
 - User can delete account along with all of their 'roars' (tweets/posts)
 
 # Models 
@@ -40,23 +40,23 @@ community engagement application
 - Community {
 		name: {
 			type: String,
-			required : true,
+			required: true,
 		},
 		zip: {
 			type: Number,
 			required: true,
 		},
 		user: {
-			ref : 'User'
+			ref: 'User'
 		}
 		roar: {
-			ref : 'roar'
+			ref: 'roar'
 		}
 	}
 - Roar {
 		title: {
-			type : String
-			required : true
+			type: String
+			required: true
 		},
 		content: String,
 		date: Date.now,
