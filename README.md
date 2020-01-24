@@ -1,7 +1,7 @@
 # project-R
 community engagement application
 
-![our wireframe](./images/wireframe1.png)
+![our wireframe](./images/Wireframe1.png)
 
 # User Story
 
