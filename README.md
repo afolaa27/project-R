@@ -22,21 +22,20 @@ community engagement application
 - User can delete account along with all of their 'roars' (tweets/posts)
 
 # Models 
-
+```
 - User {
 		username: {
-			type : String,
-			required : true
+			type: String,
+			required: true
 		},
 		password: {
-			type : String,
+			type: String,
 			required: true,
 		}
 		firstName: String,
 		lastName: String,
 		isAdmin: false,
 		banned: false,
-
 	}
 - Community {
 		name: {
@@ -60,12 +59,13 @@ community engagement application
 			required : true
 		},
 		content: String,
-		date : Date.now,
-		user{
-			ref : 'User'
+		date: Date.now,
+		user: {
+			ref: 'User'
 		}
 		community: {
-			ref : "Commmunity"
+			ref: "Commmunity"
 		}
-		ref : null
+		ref: null
 	}
+```
