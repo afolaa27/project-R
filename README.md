@@ -33,9 +33,7 @@ community engagement application
 			required: true,
 		}
 		firstName: String,
-		lastName: String,
-		isAdmin: false,
-		banned: false,
+		lastName: String
 	}
 - Community {
 		name: {
@@ -46,12 +44,11 @@ community engagement application
 			type: Number,
 			required: true,
 		},
-		user: {
+		admin: {
 			ref: 'User'
-		}
-		roar: {
-			ref: 'roar'
-		}
+		}, 
+		users: [], /// Community.find().where(asdfasdf $in users) // list all communities for asdfasdf
+		bannedUsers: []
 	}
 - Roar {
 		title: {
@@ -65,7 +62,8 @@ community engagement application
 		}
 		community: {
 			ref: "Commmunity"
+			// null if public
 		}
-		ref: null
+		
 	}
 ```
