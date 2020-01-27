@@ -10,7 +10,7 @@ body {
 	justify-content: space-between;
 }
 .homeBody{
-	margin-left: 40%;
+	margin-left: 37%;
 	margin-top: 15%;
 	text-align: center;
 	background-color: lightgrey;
@@ -29,8 +29,19 @@ p {
 	font-family: vernon;
 }
 .Welcome{
-	margin-left:40%;
+	margin-left:37%;
 	margin-top:10px;
 	font-family: vernon;
 
+}
+.communityForm{
+	text-align: center;
+	display: flex;
+	margin-left: 37%;
+	padding-left: 19px;
+	flex-direction: row;
+	background-color: lightgrey;
+	width: 250px;
+	opacity: 0.7;
+	border-radius: 2%;
 }

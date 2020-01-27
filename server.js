@@ -25,6 +25,9 @@ server.use(session({
 const authController = require('./controllers/authController')
 server.use('/auth', authController)
 
+const communityController = require('./controllers/communityController')
+server.use('/community', communityController)
+
 
 //render the main page
 server.get('/', (req, res) => {

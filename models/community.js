@@ -9,7 +9,12 @@ const communitySchema = new mongoose.Schema({
 		type: Number,
 		required: true,
 	},
+	description:{
+		type: String,
+		required: true,
+	},
 	admin: {
+		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User'
 	}, 
 	users: [], 
