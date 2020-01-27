@@ -26,6 +26,7 @@ router.post('/new', async (req, res, next)=>{
 			name : title,
 			description : description,
 			zip: zipCode,
+			
 			admin: req.session.userId
 		})	
 		res.redirect()
@@ -34,6 +35,22 @@ router.post('/new', async (req, res, next)=>{
 		next(err)
 	}
 
+})
+
+//displays all communities
+router.get('/show',  async(req, res, next) => {
+
+	try{
+		//gets all created communities
+		const allCommunities = await Community.find({}).populate('admin')
+		console.log(allCommunities.admin);
+
+		//passes all communities to the template
+		res.render('community/show.ejs', {communities : allCommunities})
+	}
+	catch(err){
+		next(err)
+	}	
 })
 
 

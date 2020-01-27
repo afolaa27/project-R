@@ -132,7 +132,7 @@ router.post('/login', async (req, res, next) => {
 				req.session.message = 'Welcome ' + currentUser.username + "!"
 
 				//redirect to the homepage once the user is logged in
-				res.redirect('/')
+				res.redirect('/community/show')
 			} else {
 				//if the password is wrong
 				console.log('password is wrong') 

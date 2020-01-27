@@ -1,0 +1,20 @@
+<%-include('../partials/header.ejs')%>
+<h1 class="Welcome">List of Communities</h1>
+
+
+<div class="container">
+	<%communities.forEach((communities)=>{%>
+	<div class="card">
+		<strong><%=communities.name%></strong>
+		<p><%=communities.description%></p>
+		<small>Created By:</small>
+		<small>Created: <%=communities.date.toLocaleString()%></small>
+
+		<button class="joinBtn">Join</button>
+	</div>
+		<br>
+	<%})%>
+</div>
+
+
+<%-include('../partials/footer.ejs')%>
