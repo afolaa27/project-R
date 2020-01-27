@@ -6,11 +6,12 @@ const bodyParser = require('body-parser')
 const session = require('express-session')
 const methodOverride = require('method-override')
 
+//connect to db
+require('./db/db.js')
 
-
-
-
-
+//middleware
+server.use(express.static('public'))
+server.use(bodyParser.urlencoded({ extended: false }))
 
 
 //listeners
