@@ -1,0 +1,32 @@
+<%- include('./partials/header.ejs') %>
+
+<div class="loginNav">
+
+	<form method="GET" action="/">
+		<button>Home</button>
+	</form>
+	<form method="GET" action="/auth/register">
+		<button>Sign Up</button>
+	</form>
+
+</div>
+
+<h2>Log in to R Community</h2>
+
+<p><%= message %></p>
+
+<form method="POST" action="/auth/login">
+	<fieldset>
+		<legend>Enter username and password below</legend>	
+		<label for="username">Username:</label>
+		<input type="text" name="username" placeholder="Choose a username">
+	</fieldset>
+	<fieldset>
+		<label for="username">Password:</label>
+		<input type="password" name="password" placeholder="Choose a password">
+	</fieldset>
+	<button>Log in</button>
+</form>
+
+
+<%- include('./partials/footer.ejs') %>
