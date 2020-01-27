@@ -1,7 +1,10 @@
 <%-include('../partials/header.ejs')%>
-<h1 class="Welcome">List of Communities</h1>
-
-
+<div class="homeNav">	
+	<form method="GET" action="/community/new">
+		<button>Create Community</button>
+	</form>
+</div>
+<h1 class="Welcome">Communities</h1>
 <div class="container">
 	<%communities.forEach((communities)=>{%>
 	<div class="card">
@@ -9,10 +12,10 @@
 		<p><%=communities.description%></p>
 		<small>Created By:</small>
 		<small>Created: <%=communities.date.toLocaleString()%></small>
-
+		
 		<button class="joinBtn">Join</button>
 	</div>
-		<br>
+
 	<%})%>
 </div>
 
