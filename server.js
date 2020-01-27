@@ -13,6 +13,28 @@ require('./db/db.js')
 server.use(express.static('public'))
 server.use(bodyParser.urlencoded({ extended: false }))
 
+//session data
+server.use(session({
+	secret: process.env.SESSION_SECRET,
+	resave: false,
+	saveUninitialized: false, 
+}))
+
+
+//controllers
+const authController = require('./controllers/authController')
+server.use('/auth', authController)
+
+
+//render the main page
+server.get('/', (req, res) => {
+	res.render('home.ejs')
+})
+
+//create 404 error page
+server.get('*', (req, res) => {
+	res.render('404.ejs')
+})
 
 //listeners
 server.listen(PORT, () => {
