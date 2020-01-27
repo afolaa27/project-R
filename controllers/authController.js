@@ -42,22 +42,20 @@ router.post('/register', async (req, res, next) => {
     // use session to tell the user username exists
     console.log("username exists");
 
-    req.session.message = `Username ${desiredUsername} already taken.`
-    req.session.messageStatus = "bad"
+    req.session.message = `${requestedUsername} is already taken.`
     res.redirect('/auth/register')
 
 
-  }
+    //otherwise if the username is available then we can register 
+    //the user
+  } else {
 
-
-  // else // i.e. username is available
-  else {
-    // create the user
-    const createdUser = await User.create({
-      username: desiredUsername,
-      password: desiredPassword
+    const newUser = await User.create({
+      username: requestedUsername,
+      password: requestedPassword
     })
-    // save the fact that they are logged in in the session
+
+    //they must be logged in to the session
     req.session.loggedIn = true
     // helpful to store something that uniquely identifies them
     // recommend: their id -- it is "more" unique that a username we had to validate
