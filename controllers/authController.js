@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const User = require('../models/user')
-
+const Roar = require('../models/roar')
 //registration 
 //GET /register
 router.get('/register', async (req, res, next) => {
@@ -133,6 +133,20 @@ router.post('/login', async (req, res, next) => {
 				req.session.message = 'Welcome ' + currentUser.username + "!"
 
 				//redirect to the homepage once the user is logged in
+				console.log(req.session.userId);
+				const user = await User.findOne({_id : req.session.userId})
+				console.log(user.communities.length);
+				if(user.communities.length<1){
+
+					const publicFeeds = await Roars.findOne({public : true})
+					res.redirect('roar/feed',{public : publicFeeds})
+				}
+				else {
+
+					  
+				}
+
+
 				res.redirect('/community/show')
 			} else {
 				//if the password is wrong
