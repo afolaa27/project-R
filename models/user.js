@@ -11,7 +11,8 @@ const userSchema = new mongoose.Schema({
 		required: true,
 	},
 	firstName: String,
-	lastName: String
+	lastName: String,
+	communities: []
 })	
 
 const User = mongoose.model('User', userSchema)
