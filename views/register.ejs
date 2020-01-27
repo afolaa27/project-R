@@ -1,0 +1,31 @@
+<%- include('./partials/header.ejs') %>
+
+<a href="/">Home</a>
+
+<h2>Sign up to join R Community</h2>
+
+<p><%= message %></p>
+
+<form method="POST" action="/auth/register">
+	<fieldset>
+		<legend>Choose a username and password below</legend>	
+		<label for="username">Username:</label>
+		<input type="text" name="username" placeholder="Choose a username">
+	</fieldset>
+	<fieldset>
+		<label for="username">Password:</label>
+		<input type="password" name="password" placeholder="Choose a password">
+	</fieldset>
+	<fieldset>
+		<label for="firstName">First Name:</label>
+		<input type="text" name="firstName" placeholder="Enter Your First Name">
+	</fieldset>
+	<fieldset>
+		<label for="lastName">Last Name:</label>
+		<input type="text" name="lastName" placeholder="Enter Your Last Name">
+	</fieldset>
+	<button>Sign up!</button>
+</form>
+
+
+<%- include('./partials/footer.ejs') %>
