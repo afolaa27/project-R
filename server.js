@@ -31,7 +31,12 @@ server.use('/community', communityController)
 
 //render the main page
 server.get('/', (req, res) => {
-	res.render('home.ejs')
+	//once logged in, the user should see a message
+	const messageForUser = req.session.message
+  	req.session.message = ''
+	res.render('home.ejs', {
+		message: messageForUser
+	})
 })
 
 //create 404 error page
