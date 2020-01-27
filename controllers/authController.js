@@ -132,22 +132,8 @@ router.post('/login', async (req, res, next) => {
 				//that they are logged in
 				req.session.message = 'Welcome ' + currentUser.username + "!"
 
-				//redirect to the homepage once the user is logged in
-				console.log(req.session.userId);
-				const user = await User.findOne({_id : req.session.userId})
-				console.log(user.communities.length);
-				if(user.communities.length<1){
-
-					const publicFeeds = await Roar.findOne({public : true})
-					res.redirect('roar/feed',{public : publicFeeds})
-				}
-				else {
-
-					  
-				}
-
-
-				res.redirect('/community/show')
+			
+				res.redirect('/roar/feed')
 			} else {
 				//if the password is wrong
 				console.log('password is wrong') 

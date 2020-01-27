@@ -28,6 +28,9 @@ server.use('/auth', authController)
 const communityController = require('./controllers/communityController')
 server.use('/community', communityController)
 
+const roarController = require('./controllers/roarController')
+server.use('/roar',roarController)
+
 
 //render the main page
 server.get('/', (req, res) => {

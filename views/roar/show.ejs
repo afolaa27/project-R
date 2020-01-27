@@ -1,5 +1,25 @@
 <%-include('../partials/header.ejs')%>
+<h1 class="Welcome">FEED</h1>
+<!-- <div class="homeNav">	
+	<form method="GET" action="/community/new">
+		<button>Create Community</button>
+	</form>
+	<form method="GET" action="/">
+		<button>Profile</button>
+	</form>
+</div> -->
 
+<div class="container">
+	<%feeds.forEach((feeds)=>{%>
+	<div class="card">
+		<strong><%=feeds.title%></strong>
+		<p><%=feeds.content%></p>
+		
+		<small>Created: <%=feeds.date.toLocaleString()%></small>
+	
+	</div>
 
+	<%})%>
+</div>
 
 <%-include('../partials/footer.ejs')%>

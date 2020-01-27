@@ -1,6 +1,27 @@
 <%-include('../partials/header.ejs')%>
 
+<div class="communityForm">
+	
+<form method="POST" action="/roar/new">
+	<div class="form-group">
+		<label for ="title">Title</label>
+		<input type="text" name="title" placeholder="Enter Your Roar Title">
+	</div>
 
+	<div class="form-group">
+		
+	<label for="content"> Content</label>
+	<textarea name="content"></textarea>
+	</div>
+	<div class="form-group">
+	<label for="public">public</label>
+	<input type="checkbox" name="public">
+	</div>
+
+	<button>Roar</button>
+</form>
+
+</div>
 
 
 <%-include('../partials/footer.ejs')%>
