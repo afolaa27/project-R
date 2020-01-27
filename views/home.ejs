@@ -1,19 +1,13 @@
 <%- include('./partials/header.ejs') %>
 
-
-<form method="GET" action="/login">
-   <button>Login</button>
-</form>
-<form method="GET" action="/auth/register">
-	<button>Sign Up</button>
-</form>
-
 <div class="homeNav">
+
+	<%= message %>
 	
 	<form method="GET" action="/login">
 		<button>Login</button>
 	</form>
-	<form method="GET" action="/register">
+	<form method="GET" action="/auth/register">
 		<button>Sign Up</button>
 	</form>
 
