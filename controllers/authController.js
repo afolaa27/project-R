@@ -84,6 +84,7 @@ router.post('/register', async (req, res, next) => {
 router.get('/login', async (req, res, next) => {
 	try {
   		console.log("\nwe can login!");
+  		console.log(req.session.body)
   		console.log(req.session.message);
 
   		let messageForLogin = req.session.message
