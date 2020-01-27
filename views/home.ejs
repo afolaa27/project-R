@@ -2,16 +2,19 @@
 
 <div class="homeNav">
 
-	<%= message %>
-	
-	<form method="GET" action="/login">
+	<form method="GET" action="/auth/login">
 		<button>Login</button>
+	</form>
+	<form method="GET" action="/auth/logout">
+		<button>Logout</button>
 	</form>
 	<form method="GET" action="/auth/register">
 		<button>Sign Up</button>
 	</form>
 
 </div>
+
+	<%= message %>
 
 <h1 class="Welcome">Welcome to Project R</h1>
 
