@@ -1,15 +1,22 @@
 <%- include('./partials/header.ejs') %>
 
-<form method="GET" action="/login">
-   <button>Login</button>
-</form>
-<form method="GET" action="/register">
-	<button>Sign Up</button>
-</form>
+<div class="homeNav">
+	
+	<form method="GET" action="/login">
+		<button>Login</button>
+	</form>
+	<form method="GET" action="/register">
+		<button>Sign Up</button>
+	</form>
 
-<h1>Welcome to Project R</h1>
+</div>
 
-<p>Find communities to join!</p>
-<p>If you don't follow community rules, you can get banned from a community by the admin</p>
+<h1 class="Welcome">Welcome to Project R</h1>
+
+<div class='homeBody'>
+	<p>Find communities to join!</p>
+	<p>If you don't follow community rules, you can get banned from a community by the admin</p>
+</div>
+
 
 <%- include('./partials/footer.ejs') %>
