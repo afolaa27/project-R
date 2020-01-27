@@ -137,7 +137,7 @@ router.post('/login', async (req, res, next) => {
 				console.log(user.communities.length);
 				if(user.communities.length<1){
 
-					const publicFeeds = await Roars.findOne({public : true})
+					const publicFeeds = await Roar.findOne({public : true})
 					res.redirect('roar/feed',{public : publicFeeds})
 				}
 				else {
