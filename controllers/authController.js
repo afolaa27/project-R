@@ -12,6 +12,7 @@ router.get('/register', async (req, res, next) => {
   		let messageToDisplay = req.session.message
 
   		req.session.message = undefined
+  		req.session.member = false
   		res.render('register.ejs', {
   			message: messageToDisplay
   		})

@@ -10,23 +10,57 @@
 		<button>Profile</button>
 	</form>
 </div>
+<small><%= message %></small>
+
 <h1 class="Welcome">Communities</h1>
 <div class="container">
-	<%for(let i =0; i<communities.length; i++){%>
-	<div class="card">
-		<strong><%=communities[i].name%></strong>
-		<p><%=communities[i].description%></p>
-		<small>Created By: <%=communities[i].admin.username%></small>
-		<small>Created: <%=communities[i].date.toLocaleString()%></small>
+	<%for (let i = 0; i < communities.length; i++) {
+		console.log("\nhere is communities[i]");
+		console.log(communities[i]);
+		%>
+		<div class="card">
+			<strong><%=communities[i].name%></strong>
+			<p><%=communities[i].description%></p>
+			<small>Created By: <%=communities[i].admin.username%></small>
+			<small>Created: <%=communities[i].date.toLocaleString()%></small>
+		<div>
 
-		
-		<form method="POST" action="/community/join/<%=communities[i]._id%>">
-		<button class="joinBtn">Join</button>
-		</form>
-	</div>
+		<%
+			console.log("\n here is communities[i].users");
+			console.log(communities[i].users);
+		%>
+
+		<%
+
+		let userIsNotMember = false
+		for(let y = 0; y<communities[i].users.length; y++){
+			%>
+			<% if(communities[i].users[y] == loggedInUserId){ %> 
+				<% userIsNotMember = true%> 
+				<%console.log("else",communities[i].users[y] === loggedInUserId);%>
+			<% } else { %>
+				<% userIsNotMember=false %>
+			<%}%>
+		<%}%>
+			<%console.log( "current value: ",userIsNotMember);%>
+				<%if(!userIsNotMember) {%>
+					<% console.log("heres the c:", communities[i].id);%>
+					<form method="POST" action="/community/join/<%=communities[i]._id%>">
+						<button class="joinBtn">Join</button>
+						
+					</form>
+				<%} else {%>
+					<form method="GET" action="/roar/feed/<%=communities[i]._id%>">
+						<button class="joinBtn">View Community Feeds</button>
+						<%userIsNotMember = false%>
+						<%console.log("new value:",userIsNotMember);%>
+					</form>
+				<%}%>
+		</div>
+		</div>
 	<%}%>
 
-</div>
+	</div>
 
 
-<%-include('../partials/footer.ejs')%>
+	<%-include('../partials/footer.ejs')%>

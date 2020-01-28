@@ -45,11 +45,19 @@ router.get('/show', requireAuth,  async(req, res, next) => {
 
 	try{
 		//gets all created communities
+		const messageToDisplay = req.session.message
 		const allCommunities = await Community.find({}).populate('admin').populate('community.admin')
 		//console.log("who made this page ",allCommunities);
+		/*const communitiesJoined = await User.findById({_id : req.session.userId})
 
+		console.log('populates',communitiesJoined.communities);*/
+		
 		//passes all communities to the template
-		res.render('community/show.ejs', {communities : allCommunities})
+		res.render('community/show.ejs', { 
+			communities: allCommunities, 
+			message: messageToDisplay,
+			loggedInUserId: req.session.userId
+		})
 	}
 	catch(err){
 		next(err)
@@ -60,13 +68,13 @@ router.get('/show', requireAuth,  async(req, res, next) => {
 //join a specific community 
 
 router.post('/join/:id', requireAuth, async(req, res, next) => {
-		try{
-			
+	try{
+
 			//queried the database for the user that wants to join a community 
 			//and the community they wants to join 
 			const userToJoin = await User.findOne({_id: req.session.userId})
-		    const communityToJoin = await Community.findOne({_id : req.params.id})
-		    
+			const communityToJoin = await Community.findOne({_id : req.params.id})
+
 
 		    //queried the database to see if user is already a part of a community
 		    const communityMember = await Community.findOne({users : userToJoin._id})
@@ -74,30 +82,34 @@ router.post('/join/:id', requireAuth, async(req, res, next) => {
 		    //queried the database to see if commiunity has been added to the list of 
 		    //communities the user is a member of
 		    const userMember = await User.findOne({communities : communityToJoin._id})
-		  
 
-		  	console.log("new member ", communityMember +" community to join ", userMember);
+
+		    console.log("new member ", communityMember +" community to join ", userMember);
 
 		    if (!communityMember && !userMember ){
 		    	communityToJoin.users.push({_id: userToJoin._id})
 		    	userToJoin.communities.push({_id: communityToJoin._id})
-		   		communityToJoin.save()
-		   		userToJoin.save()
-		   		console.log("I joined");
+		    	communityToJoin.save()
+		    	userToJoin.save()
+		    	res.redirect('/roar/feed')
+		    	console.log("I joined");
 		    }else{
 		    	console.log("I am a member");
 		    	req.session.message = "You Are Already a member of this Community"
+
 		    	res.redirect('/community/show')
+		    	req.session.message = " "
+
 		    }
 
 
 
 		    console.log(communityToJoin);
-		  }
-		    catch(err){
-		      next(err)
-		  }
-})
+		}
+		catch(err){
+			next(err)
+		}
+	})
 
 
 

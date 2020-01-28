@@ -7,7 +7,8 @@ const Roar = require('../models/roar')
 router.get('/feed', async(req, res, next) => {
 	
 	try{
-		//redirect to the homepage once the user is logged in
+		//redirect to the feed page once the user is logged in
+
 		const user = await User.findOne({_id : req.session.userId})
 		
 
@@ -60,6 +61,9 @@ router.post('/new', async(req, res, next) => {
 		    	public : ifPublic,
 
 		    })
+
+
+		    
 		    res.redirect('./feed')
 		}
 		catch(err){
