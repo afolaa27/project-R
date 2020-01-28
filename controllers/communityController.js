@@ -72,23 +72,24 @@ router.post('/join/:id', requireAuth, async(req, res, next) => {
 
 			//queried the database for the user that wants to join a community 
 			//and the community they wants to join 
-			const userToJoin = await User.findOne({_id: req.session.userId})
-			const communityToJoin = await Community.findOne({_id : req.params.id})
+			const userToJoin = await User.findById(req.session.userId)
+			console.log(userToJoin)
+			const communityToJoin = await Community.findById(req.params.id)
 
 
 		    //queried the database to see if user is already a part of a community
-		    const communityMember = await Community.findOne({users : userToJoin._id})
+		    const communityMember = await Community.findById(userToJoin._id)
 
 		    //queried the database to see if commiunity has been added to the list of 
 		    //communities the user is a member of
-		    const userMember = await User.findOne({communities : communityToJoin._id})
+		    const userMember = await User.findById(communityToJoin._id)
 
 
 		    console.log("new member ", communityMember +" community to join ", userMember);
 
 		    if (!communityMember && !userMember ){
-		    	communityToJoin.users.push({_id: userToJoin._id})
-		    	userToJoin.communities.push({_id: communityToJoin._id})
+		    	communityToJoin.users.push(userToJoin._id)
+		    	userToJoin.communities.push(communityToJoin._id)
 		    	communityToJoin.save()
 		    	userToJoin.save()
 		    	res.redirect('/roar/feed')
