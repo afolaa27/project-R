@@ -13,13 +13,15 @@ router.get('/new', (req, res)=>{
 })
 
 //creates new community
-router.post('/new', async (req, res, next)=>{
+router.post('/new',requireAuth, async (req, res, next)=>{
 	try{
 
 		//gets all community information from the new.ejs form
+		console.log("User id :",req.session.username);
 		const title = req.body.communityTitle
 		const zipCode = req.body.zipCode
 		const description = req.body.communityDescription
+		const creator = req.session.userId
 
 		//creates a community with its information in the community collections
 		//datatbase
@@ -28,9 +30,9 @@ router.post('/new', async (req, res, next)=>{
 			description : description,
 			zip: zipCode,
 			
-			admin: req.session.userId
+			admin: creator
 		})	
-		res.redirect()
+		res.redirect('/community/show')
 	}
 	catch(err){
 		next(err)
@@ -43,8 +45,8 @@ router.get('/show',  async(req, res, next) => {
 
 	try{
 		//gets all created communities
-		const allCommunities = await Community.find({}).populate('admin')
-		console.log(allCommunities.admin);
+		const allCommunities = await Community.find({}).populate('admin').populate('community.admin')
+		console.log("who made this page ",allCommunities);
 
 		//passes all communities to the template
 		res.render('community/show.ejs', {communities : allCommunities})

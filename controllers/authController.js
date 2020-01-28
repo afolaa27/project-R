@@ -38,7 +38,7 @@ router.post('/register', async (req, res, next) => {
         })
 
         //check to see if user has this username
-        console.log(userHasUsername);
+        console.log("this is :",userHasUsername);
         console.log('this is the user')
 
         if (userHasUsername) {
@@ -69,7 +69,7 @@ router.post('/register', async (req, res, next) => {
             console.log("now registered as " + newUser.username);
 
             //we should redirect to home once the user has registered
-            res.redirect('/')
+            res.redirect('/roar/feed')
 
         }
 

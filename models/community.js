@@ -19,7 +19,8 @@ const communitySchema = new mongoose.Schema({
 	},
 	admin: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref: 'User'
+		ref: 'User', 
+		required : true
 	}, 
 	users: [], 
 	bannedUsers: []

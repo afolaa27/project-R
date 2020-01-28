@@ -3,23 +3,25 @@
 	<form method="GET" action="/community/new">
 		<button>Create Community</button>
 	</form>
+	<form method="GET" action="/roar/feed">
+		<button>Feed</button>
+	</form>
 	<form method="GET" action="/">
 		<button>Profile</button>
 	</form>
 </div>
 <h1 class="Welcome">Communities</h1>
 <div class="container">
-	<%communities.forEach((communities)=>{%>
+	<%for(let i =0; i<communities.length; i++){%>
 	<div class="card">
-		<strong><%=communities.name%></strong>
-		<p><%=communities.description%></p>
-		<small>Created By:</small>
-		<small>Created: <%=communities.date.toLocaleString()%></small>
-		
+		<strong><%=communities[i].name%></strong>
+		<p><%=communities[i].description%></p>
+		<small>Created By: <%=communities[i].admin.username%></small>
+		<small>Created: <%=communities[i].date.toLocaleString()%></small>
 		<button class="joinBtn">Join</button>
 	</div>
+	<%}%>
 
-	<%})%>
 </div>
 
 

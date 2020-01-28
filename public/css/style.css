@@ -48,14 +48,17 @@ p {
 	height: auto;
 	width: 200px;
 	box-shadow: 0 4px 8px 0px rgba(0,0,0,0.2);
-	transition:0.2s;
+	transition: all .2s ease-in-out;
 }
 .card:hover{
-	box-shadow: 0 16px 32px 0pc rgba(218,165,32,0.5)
+	box-shadow: 0 16px 32px 0pc rgba(218,165,32,0.7);
+	transform: scale(1.1);
+	
 }
 .container{
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: space-between;
+
 }
