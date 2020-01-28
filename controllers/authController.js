@@ -6,8 +6,8 @@ const Roar = require('../models/roar')
 //GET /register
 router.get('/register', async (req, res, next) => {
 	try {
-  		console.log("\nwe can register!");
-  		console.log(req.session.message);
+  		//console.log("\nwe can register!");
+  		//console.log(req.session.message);
 
   		let messageToDisplay = req.session.message
 
@@ -26,7 +26,7 @@ router.get('/register', async (req, res, next) => {
 router.post('/register', async (req, res, next) => {
     try {
 
-        console.log(req.body)
+        //console.log(req.body)
         const requestedUsername = req.body.username
         const requestedPassword = req.body.password
 
@@ -38,13 +38,12 @@ router.post('/register', async (req, res, next) => {
         })
 
         //check to see if user has this username
-        console.log("this is :",userHasUsername);
-        console.log('this is the user')
+      
 
         if (userHasUsername) {
 
             // use session to tell the user username exists
-            console.log("username exists");
+            //console.log("username exists");
 
             req.session.message = `${requestedUsername} is already taken.`
             res.redirect('/auth/register')
@@ -66,7 +65,7 @@ router.post('/register', async (req, res, next) => {
             req.session.username = newUser.username
             req.session.message = "Thanks for signing up " + newUser.username + "!"
 
-            console.log("now registered as " + newUser.username);
+            //console.log("now registered as " + newUser.username);
 
             //we should redirect to home once the user has registered
             res.redirect('/roar/feed')
@@ -84,8 +83,8 @@ router.post('/register', async (req, res, next) => {
 router.get('/login', async (req, res, next) => {
 	try {
   		console.log("\nwe can login!");
-  		console.log(req.session.body)
-  		console.log(req.session.message);
+  		//console.log(req.session.body)
+  		//onsole.log(req.session.message);
 
   		let messageForLogin = req.session.message
 
@@ -102,7 +101,7 @@ router.get('/login', async (req, res, next) => {
 //POST /login
 router.post('/login', async (req, res, next) => {
 	try {
-		console.log('\nuser should be able to login')
+		//console.log('\nuser should be able to login')
 		//find out if there are any users with that username
 
 		const currentUser = await User.findOne({ 
@@ -110,7 +109,7 @@ router.post('/login', async (req, res, next) => {
 
 		//if there is no user with that username
 		if(!currentUser) {
-			console.log('\ninvalid user')
+			//console.log('\ninvalid user')
 
 			//create a message to let the user know
 			//that it is a bad username or password
@@ -136,7 +135,7 @@ router.post('/login', async (req, res, next) => {
 				res.redirect('/roar/feed')
 			} else {
 				//if the password is wrong
-				console.log('password is wrong') 
+				//console.log('password is wrong') 
 				//send a message to the user saying it is invalid
 				req.session.message = 'Invalid username or password'
 
@@ -157,7 +156,7 @@ router.get('/logout', async (req, res, next) => {
 	//destroy the session 
 	await req.session.destroy()
 
-	console.log('\nuser should be able to logout')
+	//console.log('\nuser should be able to logout')
 	//redirect back to the login page once logged out
 	res.redirect('/auth/login')
 })

@@ -5,20 +5,20 @@ const User = require('../models/user')
 const Roar = require('../models/roar')
 
 router.get('/feed', async(req, res, next) => {
-	console.log("im here");
+	
 	try{
 		//redirect to the homepage once the user is logged in
 		const user = await User.findOne({_id : req.session.userId})
-		console.log("this is my comm",user.communities.length);
+		
 
 		if(user.communities.length<1){
 			const publicFeeds = await Roar.find({public : true})
-			console.log("this is my feed",publicFeeds);
+			
 			if(publicFeeds === null){
-				//req.session.message = "No roars at the moment "
+				req.session.message = "No roars at the moment "
 
 			}else{
-				console.log("i maed it here boy");
+				
 				const publicFeeds = await Roar.find({public : true})
 
 				res.render('./roar/show.ejs', {feeds : publicFeeds})
@@ -26,7 +26,7 @@ router.get('/feed', async(req, res, next) => {
 		}
 		else {
 			const feeds = await Roar.find({})
-			console.log("this is wrong");
+			
 			res.render('./roar/show.ejs', {feeds : feeds})
 		}
 	}
@@ -66,16 +66,5 @@ router.post('/new', async(req, res, next) => {
 			next(err)
 		}
 	})
-
-
-
-
-
-
-
-
-
-
-
 
 module.exports = router

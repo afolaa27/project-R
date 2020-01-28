@@ -18,7 +18,11 @@
 		<p><%=communities[i].description%></p>
 		<small>Created By: <%=communities[i].admin.username%></small>
 		<small>Created: <%=communities[i].date.toLocaleString()%></small>
+
+		
+		<form method="POST" action="/community/join/<%=communities[i]._id%>">
 		<button class="joinBtn">Join</button>
+		</form>
 	</div>
 	<%}%>
 
