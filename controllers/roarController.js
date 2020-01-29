@@ -26,7 +26,7 @@ router.get('/feed', async(req, res, next) => {
 				
 				const publicFeeds = await Roar.find({public : true})
 				console.log("heres the member :",req.session.member);
-				res.render('./roar/show.ejs', {feeds : publicFeeds, member : req.session.member})
+				res.render('roar/show.ejs', {feeds : publicFeeds, member : req.session.member})
 			}				
 		}
 		else {
@@ -47,7 +47,7 @@ router.get('/feed', async(req, res, next) => {
 				console.log("My membership status ;", req.session.member);
 			}
 			//console.log('these are my communities:', );
-			res.render('./roar/show.ejs', {feeds : feeds, member : req.session.member, communityPost : posts})
+			res.render('roar/show.ejs', {feeds : feeds, member : req.session.member, communityPost : posts, community : undefined})
 		}
 	}
 	catch(err){
@@ -77,7 +77,8 @@ router.get('/feed/:id', async (req, res, next) => {
 
 router.get('/new', (req, res)=>{
 
-	res.render('roar/new.ejs')
+
+	res.render('roar/new.ejs', { member : req.session.member})
 
 })
 
@@ -117,7 +118,12 @@ router.get('/new/:id',  async(req, res, next) => {
 		const id = req.params.id
 		console.log("the id of the community ",id);
 		req.session.member = true
-	   	res.render('roar/new.ejs', {id : id, member : req.session.member})
+		if(id == undefined){
+			res.render('roar/new.ejs', {id : undefined, member :req.session.member})
+		}else{
+
+	   		res.render('roar/new.ejs', {id : id, member : req.session.member})
+		}
 	  }
 	    catch(err){
 	      next(err)

@@ -13,7 +13,12 @@
 	<%if(!member){%>
 		<form method="POST" action="/roar/new">
 	<%}else{%>
+		<%if(id == undefined){%>
+			<form method="POST" action = "/roar/new">
+		<%}else{%>
 		<form method="POST" action = "/roar/new/<%=id%>">
+			<%id = undefined%>
+		<%}%>
 	<%}%>
 
 		<div class="form-group">

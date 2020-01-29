@@ -16,7 +16,7 @@
 
 <h1 class="Welcome">FEED</h1>
 
-<%if (member){%>
+<%if(member){%>
 <div class="container">
 	<%communityPost.forEach((communityPost)=>{%>
 	<div class="card">
@@ -51,9 +51,16 @@
 		<button>Add roar</button>
 </form>
 <%}else{%>
+	<%if(community == undefined){%>
+		<form method="GET" action="/roar/new">
+			<button>Add roar</button>
+		</form>
+	<%}else{%>
 	<%console.log("I am a member");%>
 	<form method="GET" action="/roar/new/<%=community%>">
+			<%comunity = undefined%>
 		<button>Add roar</button>
 	</form>
+	<%}%>
 <%}%>
 <%-include('../partials/footer.ejs')%>
