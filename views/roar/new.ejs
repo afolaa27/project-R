@@ -10,25 +10,34 @@
 </div>
 <br>
 <div class="communityForm">
-	
-<form method="POST" action="/roar/new">
-	<div class="form-group">
-		<label for ="title">Title</label>
-		<input type="text" name="title" placeholder="Enter Your Roar Title">
-	</div>
+	<%if(!member){%>
+		<form method="POST" action="/roar/new">
+	<%}else{%>
+		<%if(id == undefined){%>
+			<form method="POST" action = "/roar/new">
+		<%}else{%>
+		<form method="POST" action = "/roar/new/<%=id%>">
+			<%id = undefined%>
+		<%}%>
+	<%}%>
 
-	<div class="form-group">
-		
-	<label for="content"> Content</label>
-	<textarea name="content"></textarea>
-	</div>
-	<div class="form-group">
-	<label for="public">public</label>
-	<input type="checkbox" name="public">
-	</div>
+		<div class="form-group">
+			<label for ="title">Title</label>
+			<input type="text" name="title" placeholder="Enter Your Roar Title">
+		</div>
 
-	<button>Roar</button>
-</form>
+		<div class="form-group">
+			
+		<label for="content"> Content</label>
+		<textarea name="content"></textarea>
+		</div>
+		<div class="form-group">
+		<label for="public">public</label>
+		<input type="checkbox" name="public">
+		</div>
+
+		<button>Roar</button>
+	</form>
 
 </div>
 

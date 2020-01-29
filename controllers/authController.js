@@ -117,7 +117,7 @@ router.post('/login', async (req, res, next) => {
 			req.session.message = 'Invalid username or password'
 
 			//redirect the user to the login page to try again
-			res.redirect('/login')
+			res.redirect('/auth/login')
 		} else {
 			//if the user does exist 
 			// and the user password is the same as the password typed in
@@ -142,7 +142,7 @@ router.post('/login', async (req, res, next) => {
 
 				//redirect to the login so they have another chance
 				//to login
-				res.redirect('auth/login')
+				res.redirect('/auth/login')
 			}
 		}
 	} catch(err) {
