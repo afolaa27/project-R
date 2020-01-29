@@ -68,9 +68,6 @@ router.post('/new', async(req, res, next) => {
 		    	public : ifPublic,
 
 		    })
-
-
-
 		    res.redirect('/feed')
 		}
 		catch(err){
