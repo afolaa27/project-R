@@ -91,7 +91,6 @@ router.post('/join/:id', requireAuth, async (req, res, next) => {
 
 		    	communityToJoin.users.push(userToJoin._id)
 		    	userToJoin.communities.push(communityToJoin._id)
-\
 		    	communityToJoin.save()
 		    	userToJoin.save()
 		    	res.redirect('/roar/feed')
