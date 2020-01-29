@@ -9,7 +9,6 @@ const Roar = require('../models/roar')
 //public feed
 
 router.get('/feed', async(req, res, next) => {
-	
 	try{
 		//redirect to the feed page once the user is logged in
 
@@ -31,23 +30,42 @@ router.get('/feed', async(req, res, next) => {
 			}				
 		}
 		else {
-			const feeds = await Roar.find({})
+			const feeds = await Roar.find({public : true})
+			const userCommunity = await User.findById(req.session.userId).populate("communities")
+			//console.log("community i guess : ", userCommunity.communities.length);
+
+				let communityId = '' 
+				let posts = []
+
+			for(let i = 0; i < userCommunity.communities.length; i++){
+				communityId = userCommunity.communities[i]._id
+
+				const communityPosts = await Community.findById(communityId).populate('roars')
+				posts = communityPosts.roars
 			
-			res.render('./roar/show.ejs', {feeds : feeds, member : req.session.member})
+				console.log( "posts :",posts) 
+				console.log("My membership status ;", req.session.member);
+			}
+			//console.log('these are my communities:', );
+			res.render('./roar/show.ejs', {feeds : feeds, member : req.session.member, communityPost : posts})
 		}
 	}
 	catch(err){
 		next(err)
 	}
 })
+
 //creating roar feed for each specific community id
 router.get('/feed/:id', async (req, res, next) => {
 	try {
 		console.log("this is the community im adding roars to :",req.params.id);
 		const communitiesForUser = await Community.findById(req.params.id)
+		req.session.member = true
 		console.log("this is the information for this community: ",communitiesForUser.roars);
 		const feed = communitiesForUser.roars
-		res.render('roar/show.ejs', {feeds : feed, community : req.params.id})
+		console.log("My membership status ;", req.session.member);
+
+		res.render('roar/show.ejs', {communityPost : feed, community : req.params.id , member: req.session.member })
 
 	} catch(err) {
 		next(err)
@@ -55,7 +73,7 @@ router.get('/feed/:id', async (req, res, next) => {
 })
 
 
-// show all posts for a community 
+// add new roar 
 
 router.get('/new', (req, res)=>{
 

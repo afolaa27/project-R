@@ -16,25 +16,42 @@
 
 <h1 class="Welcome">FEED</h1>
 
+<%if (member){%>
 <div class="container">
-	<%feeds.forEach((feeds)=>{%>
+	<%communityPost.forEach((communityPost)=>{%>
 	<div class="card">
-		<strong><%=feeds.title%></strong>
-		<p><%=feeds.content%></p>
+		<strong><%=communityPost.title%></strong>
+		<p><%=communityPost.content%></p>
 		
-		<small>Created: <%=feeds.date.toLocaleString()%></small>
+		<small>Created: <%=communityPost.date.toLocaleString()%></small>
 	
 	</div>
 
 	<%})%>
+<%}else { %>
+	<div class="container">
+		<%feeds.forEach((feeds)=>{%>
+		<div class="card">
+			<strong><%=feeds.title%></strong>
+			<p><%=feeds.content%></p>
+			
+			<small>Created: <%=feeds.date.toLocaleString()%></small>
+		
+		</div>
+
+		<%})%>
+	</div>
+<% } %>
 </div>
 <br>
 
 <% if(!member){%>
+<%console.log("I am not a member");%>
 <form method="GET" action="/roar/new">
 		<button>Add roar</button>
 </form>
 <%}else{%>
+	<%console.log("I am a member");%>
 	<form method="GET" action="/roar/new/<%=community%>">
 		<button>Add roar</button>
 	</form>
