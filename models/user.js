@@ -14,9 +14,9 @@ const userSchema = new mongoose.Schema({
 	lastName: String,
 	communities: [{
 		type: mongoose.Schema.Types.ObjectId,
-		ref: 'User'
-		} 
-	] // type
+		ref: 'Community'
+	}]
+
 })	
 
 const User = mongoose.model('User', userSchema)
