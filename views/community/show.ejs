@@ -15,6 +15,7 @@
 <h1 class="Welcome">Communities</h1>
 <div class="container">
 	<%for (let i = 0; i < communities.length; i++) {
+
 		console.log("\nhere is communities[i]");
 		console.log(communities[i]);
 		%>
@@ -32,30 +33,29 @@
 
 		<%
 
-		let userIsNotMember = false
+		let userIsMember = false
 		for(let y = 0; y<communities[i].users.length; y++){
 			%>
 			<% if(communities[i].users[y] == loggedInUserId){ %> 
-				<% userIsNotMember = true%> 
+				<% userIsMember = true%> 
 				<%console.log("else",communities[i].users[y] === loggedInUserId);%>
-			<% } else { %>
-				<% userIsNotMember=false %>
-			<%}%>
+			<% } %>
 		<%}%>
-			<%console.log( "current value: ",userIsNotMember);%>
-				<%if(!userIsNotMember) {%>
-					<% console.log("heres the c:", communities[i].id);%>
-					<form method="POST" action="/community/join/<%=communities[i]._id%>">
-						<button class="joinBtn">Join</button>
-						
-					</form>
-				<%} else {%>
-					<form method="GET" action="/roar/feed/<%=communities[i]._id%>">
-						<button class="joinBtn">View Community Feeds</button>
-						<%userIsNotMember = false%>
-						<%console.log("new value:",userIsNotMember);%>
-					</form>
-				<%}%>
+		<%console.log( "current value: ",userIsMember);%>
+		<%if(!userIsMember) {%>
+			<% console.log("heres the c:", communities[i].id);%>
+			<form method="POST" action="/community/join/<%=communities[i]._id%>">
+				<button class="joinBtn">Join</button>
+				
+			</form>
+		<%} else {
+			console.log("user is member of", communities[i].name);
+			%>
+			<form method="GET" action="/roar/feed/<%=communities[i]._id%>">
+				<button class="joinBtn">View Community Feeds</button>
+				<% console.log("new value:",userIsMember); %>
+			</form>
+		<%}%>
 		</div>
 		</div>
 	<%}%>
