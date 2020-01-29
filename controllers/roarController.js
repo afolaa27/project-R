@@ -59,7 +59,7 @@ router.get('/feed', async(req, res, next) => {
 router.get('/feed/:id', async (req, res, next) => {
 	try {
 		console.log("this is the community im adding roars to :",req.params.id);
-		const communitiesForUser = await Community.findById(req.params.id)
+		const communitiesForUser = await Community.findById(req.params.id).populate('roars')
 		req.session.member = true
 		console.log("this is the information for this community: ",communitiesForUser.roars);
 		const feed = communitiesForUser.roars
@@ -112,7 +112,55 @@ router.post('/new', async(req, res, next) => {
 		}
 	})
 
+router.get('/new/:id',  async(req, res, next) => {
+	try{
+		const id = req.params.id
+		console.log("the id of the community ",id);
+		req.session.member = true
+	   	res.render('roar/new.ejs', {id : id, member : req.session.member})
+	  }
+	    catch(err){
+	      next(err)
+	  }
+		
+})
+router.post('/new/:id', async(req, res, next) => {
+		try{
+		const titleToAdd = req.body.title
+		const contentToAdd = req.body.content
+		const public = req.body.public
 
+		let publicFeed = false
+
+		    //checkbox returns string "on" and we need it to be a boolean
+		    //so we convert below
+		    if(public === "on"){
+		    	ifPublic = true
+		    }else{
+		    	ifPublic = false
+		    }
+		    console.log("community to add roar: ", req.params.id);
+		    console.log("User adding roar: ", req.session.userId);
+		    const createRoar = await Roar.create({
+		    	title : titleToAdd,
+		    	content : contentToAdd,
+		    	community : req.params.id,
+		    	user : req.params.userId,
+		    	public : ifPublic,
+
+		    })
+
+		    const communityId = await Community.findById(req.params.id)
+		    
+		    	const community = communityId.roars;
+		    	community.push(createRoar)
+		    	communityId.save()
+		    res.redirect('/roar/feed/'+ req.params.id)
+		  }
+		    catch(err){
+		      next(err)
+		  }
+})
 
 
 
