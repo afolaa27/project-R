@@ -45,8 +45,7 @@
 		<%if(!userIsMember) {%>
 			<% console.log("heres the c:", communities[i].id);%>
 			<form method="POST" action="/community/join/<%=communities[i]._id%>">
-				<button class="joinBtn">Join</button>
-				
+				<button class="joinBtn">Join</button>	
 			</form>
 		<%} else {
 			console.log("user is member of", communities[i].name);

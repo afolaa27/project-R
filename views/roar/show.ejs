@@ -29,8 +29,14 @@
 	<%})%>
 </div>
 <br>
+
+<% if(!member){%>
 <form method="GET" action="/roar/new">
 		<button>Add roar</button>
 </form>
-
+<%}else{%>
+	<form method="GET" action="/roar/new/<%=community%>">
+		<button>Add roar</button>
+	</form>
+<%}%>
 <%-include('../partials/footer.ejs')%>

@@ -95,13 +95,14 @@ router.post('/join/:id', requireAuth, async (req, res, next) => {
 		    	userToJoin.save()
 		    	res.redirect('/roar/feed')
 		    	console.log("I joined");
-           
-        } else {
-            console.log("I am a member");
-            req.session.message = "You Are Already a member of this Community"
 
-            res.redirect('/community/show')
-            req.session.message = " "
+		    	
+		    }else{
+		    	console.log("I am a member");
+		    	req.session.message = "You Are Already a member of this Community"
+
+		    	res.redirect('/community/show')
+		    	req.session.message = " "
 
         }
 

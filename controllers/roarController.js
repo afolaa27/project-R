@@ -14,7 +14,7 @@ router.get('/feed', async(req, res, next) => {
 		//redirect to the feed page once the user is logged in
 
 		const user = await User.findById(req.session.userId)
-		console.log(user);
+		console.log( "this is the user :" ,user);
 		console.log(user.communities.length)
 
 		if(user.communities.length<1){
@@ -26,17 +26,30 @@ router.get('/feed', async(req, res, next) => {
 			}else{
 				
 				const publicFeeds = await Roar.find({public : true})
-
-				res.render('./roar/show.ejs', {feeds : publicFeeds})
+				console.log("heres the member :",req.session.member);
+				res.render('./roar/show.ejs', {feeds : publicFeeds, member : req.session.member})
 			}				
 		}
 		else {
 			const feeds = await Roar.find({})
 			
-			res.render('./roar/show.ejs', {feeds : feeds})
+			res.render('./roar/show.ejs', {feeds : feeds, member : req.session.member})
 		}
 	}
 	catch(err){
+		next(err)
+	}
+})
+//creating roar feed for each specific community id
+router.get('/feed/:id', async (req, res, next) => {
+	try {
+		console.log("this is the community im adding roars to :",req.params.id);
+		const communitiesForUser = await Community.findById(req.params.id)
+		console.log("this is the information for this community: ",communitiesForUser.roars);
+		const feed = communitiesForUser.roars
+		res.render('roar/show.ejs', {feeds : feed, community : req.params.id})
+
+	} catch(err) {
 		next(err)
 	}
 })
@@ -45,6 +58,7 @@ router.get('/feed', async(req, res, next) => {
 // show all posts for a community 
 
 router.get('/new', (req, res)=>{
+
 	res.render('roar/new.ejs')
 
 })
@@ -73,7 +87,7 @@ router.post('/new', async(req, res, next) => {
 		    	public : ifPublic,
 
 		    })
-		    res.redirect('/feed')
+		    res.redirect('/roar/feed')
 		}
 		catch(err){
 			next(err)
@@ -81,14 +95,6 @@ router.post('/new', async(req, res, next) => {
 	})
 
 
-//creating roar feed for each specific community id
-router.get('/feed/:id', async (req, res, next) => {
-	try {
-		const communitiesForUser = await Community.findById()
-	} catch(err) {
-		next(err)
-	}
-})
 
 
 
