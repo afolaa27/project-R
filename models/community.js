@@ -26,6 +26,10 @@ const communitySchema = new mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User'
 	}], 
+	roars:[{
+		type : mongoose.Schema.Types.ObjectId,
+		ref : 'Roar'
+	}],
 	bannedUsers: []
 })	
 
