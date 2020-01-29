@@ -72,23 +72,24 @@ router.post('/join/:id', requireAuth, async(req, res, next) => {
 
 			//queried the database for the user that wants to join a community 
 			//and the community they wants to join 
-			const userToJoin = await User.findOne({_id: req.session.userId})
+			const userToJoin = await User.findById(req.session.userId)
+			console.log();
 			const communityToJoin = await Community.findOne({_id : req.params.id})
-
+			console.log();
 
 		    //queried the database to see if user is already a part of a community
 		    const communityMember = await Community.findOne({users : userToJoin._id})
-
+		    console.log();
 		    //queried the database to see if commiunity has been added to the list of 
 		    //communities the user is a member of
 		    const userMember = await User.findOne({communities : communityToJoin._id})
-
+		    console.log();
 
 		    console.log("new member ", communityMember +" community to join ", userMember);
 
 		    if (!communityMember && !userMember ){
 		    	communityToJoin.users.push({_id: userToJoin._id})
-		    	userToJoin.communities.push({_id: communityToJoin._id})
+		    	userToJoin.communities.push({_id: communityToJoin._id}) // doing nothing -- try defining type in schema
 		    	communityToJoin.save()
 		    	userToJoin.save()
 		    	res.redirect('/roar/feed')

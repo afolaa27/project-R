@@ -4,6 +4,7 @@ const Community = require('../models/community')
 const User = require('../models/user')
 const Roar = require('../models/roar')
 
+// public posts
 router.get('/feed', async(req, res, next) => {
 	
 	try{
@@ -35,8 +36,14 @@ router.get('/feed', async(req, res, next) => {
 		next(err)
 	}
 })
+
+// show all posts for a community 
+
+
+
+
 router.get('/new', (req, res)=>{
-	res.render('./roar/new.ejs')
+	res.render('roar/new.ejs')
 })
 router.post('/new', async(req, res, next) => {
 
@@ -63,8 +70,8 @@ router.post('/new', async(req, res, next) => {
 		    })
 
 
-		    
-		    res.redirect('./feed')
+
+		    res.redirect('/feed')
 		}
 		catch(err){
 			next(err)
