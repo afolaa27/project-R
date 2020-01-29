@@ -67,50 +67,51 @@ router.get('/show', requireAuth,  async(req, res, next) => {
 
 //join a specific community 
 
-router.post('/join/:id', requireAuth, async(req, res, next) => {
-	try{
+router.post('/join/:id', requireAuth, async (req, res, next) => {
+    try {
 
-			//queried the database for the user that wants to join a community 
-			//and the community they wants to join 
-			const userToJoin = await User.findById(req.session.userId)
-			console.log(userToJoin)
-			const communityToJoin = await Community.findById(req.params.id)
-
-
-		    //queried the database to see if user is already a part of a community
-		    const communityMember = await Community.findById(userToJoin._id)
-
-		    //queried the database to see if commiunity has been added to the list of 
-		    //communities the user is a member of
-		    const userMember = await User.findById(communityToJoin._id)
+        //queried the database for the user that wants to join a community 
+        //and the community they wants to join 
+        const userToJoin = await User.findById(req.session.userId)
+        console.log("this is the user " + userToJoin)
+        const communityToJoin = await Community.findById(req.params.id)
 
 
-		    console.log("new member ", communityMember +" community to join ", userMember);
+        //queried the database to see if user is already a part of a community
+        const communityMember = await Community.findById(userToJoin._id)
 
-		    if (!communityMember && !userMember ){
-		    	communityToJoin.users.push(userToJoin._id)
-		    	userToJoin.communities.push(communityToJoin._id)
-		    	communityToJoin.save()
-		    	userToJoin.save()
-		    	res.redirect('/roar/feed')
-		    	console.log("I joined");
-		    }else{
-		    	console.log("I am a member");
-		    	req.session.message = "You Are Already a member of this Community"
-
-		    	res.redirect('/community/show')
-		    	req.session.message = " "
-
-		    }
+        //queried the database to see if commiunity has been added to the list of 
+        //communities the user is a member of
+        const userMember = await User.findById(communityToJoin._id)
 
 
+        console.log("new member ", communityMember + " community to join ", userMember);
 
-		    console.log(communityToJoin);
-		}
-		catch(err){
-			next(err)
-		}
-	})
+        if (!communityMember && !userMember) {
+
+            communityToJoin.users.push(userToJoin._id)
+            userToJoin.communities.push(communityToJoin._id)
+
+            communityToJoin.save()
+            userToJoin.save()
+
+            res.redirect('/roar/feed/' + communityToJoin._id)
+            console.log("I joined");
+
+        } else {
+            console.log("I am a member");
+            req.session.message = "You Are Already a member of this Community"
+
+            res.redirect('/community/show')
+            req.session.message = " "
+
+        }
+
+        console.log(communityToJoin);
+    } catch (err) {
+        next(err)
+    }
+})
 
 
 

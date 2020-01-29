@@ -12,10 +12,7 @@ const userSchema = new mongoose.Schema({
 	},
 	firstName: String,
 	lastName: String,
-	communities: [{
-		type: mongoose.Schema.Types.ObjectId,
-		ref: 'Community'
-	}]
+	communities: []
 })	
 
 const User = mongoose.model('User', userSchema)

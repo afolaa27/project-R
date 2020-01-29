@@ -4,13 +4,16 @@ const Community = require('../models/community')
 const User = require('../models/user')
 const Roar = require('../models/roar')
 
+
+//public feed
 router.get('/feed', async(req, res, next) => {
 	
 	try{
 		//redirect to the feed page once the user is logged in
 
-		const user = await User.findOne({_id : req.session.userId})
-		
+		const user = await User.findById(req.session.userId)
+		console.log(user);
+		console.log(user.communities.length)
 
 		if(user.communities.length<1){
 			const publicFeeds = await Roar.find({public : true})
@@ -35,9 +38,13 @@ router.get('/feed', async(req, res, next) => {
 		next(err)
 	}
 })
+
+//creating new roars
 router.get('/new', (req, res)=>{
-	res.render('./roar/new.ejs')
+	res.render('/roar/new.ejs')
 })
+
+//posting public roars
 router.post('/new', async(req, res, next) => {
 
 	try{
@@ -62,13 +69,25 @@ router.post('/new', async(req, res, next) => {
 
 		    })
 
-
-		    
-		    res.redirect('./feed')
+		    res.redirect('/feed')
 		}
 		catch(err){
 			next(err)
 		}
 	})
+
+
+//creating roar feed for each specific community id
+router.get('/feed/:id', async (req, res, next) => {
+	try {
+		const communitiesForUser = await Community.findById()
+	} catch(err) {
+		next(err)
+	}
+})
+
+
+
+
 
 module.exports = router

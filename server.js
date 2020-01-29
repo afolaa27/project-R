@@ -20,6 +20,21 @@ server.use(session({
 	saveUninitialized: false, 
 }))
 
+//add res.locals to store username and userId in session
+//to access username in templates
+server.use((req, res, next) => {
+  if(req.session.loggedIn) {
+    res.locals.username = req.session.username
+    res.locals.userId = req.session.userId
+  } else {
+    res.locals.username = false
+    res.locals.userId = undefined
+    res.locals.loggedIn = false
+  }
+  next()
+})
+
+
 
 //controllers
 const authController = require('./controllers/authController')
@@ -30,6 +45,9 @@ server.use('/community', communityController)
 
 const roarController = require('./controllers/roarController')
 server.use('/roar',roarController)
+
+const userController = require('./controllers/userController')
+server.use('/user',userController)
 
 
 //render the main page
