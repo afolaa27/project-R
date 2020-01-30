@@ -11,26 +11,15 @@ const Roar = require('../models/roar')
 router.get('/', async (req, res, next) => {
 	try {
 
-		const user = await User.findById(req.session.userId)
-		const userCommunity = await Community.find({}).populate('community').populate('user')
-		console.log("this is user that wants to UD:",user._id)
-		console.log("THIS IS MY COMM : ",userCommunity)
-		console.log("I STOP HERE")
+		const user = await User.findById(req.session.userId).populate('communities')
+		const userCommunity = await Community.find({}).populate('user')
+	
 		let isAdmin = false
 		let isMember = false
 		let memberContainer = []
 
-		console.log("Number of users in this community",userCommunity.length);
-		console.log("I End Here");
-
 
 		for(let i = 0; i<userCommunity.length; i++){
-
-			console.log(`the admin: ${userCommunity[i].admin} is a ${typeof userCommunity[i].admin }`);
-			console.log(`the user._id: ${user._id} is a ${typeof user._id }`);
-			
-			console.log("EXPRESSION>>> 1", user._id == userCommunity[i].admin);
-
 
 			if(user._id.toString() == userCommunity[i].admin.toString()){
 				console.log("inside the loop: ", userCommunity[i].admin);
@@ -71,6 +60,9 @@ router.get('/', async (req, res, next) => {
 		next(err)
 	}
 })
+
+
+
 
 
 //destroy route
