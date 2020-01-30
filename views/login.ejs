@@ -1,32 +1,29 @@
 <%- include('./partials/header.ejs') %>
 
-<div class="homeNav">
-
-	<form method="GET" action="/">
-		<button>Home</button>
-	</form>
-	<form method="GET" action="/auth/register">
-		<button>Sign Up</button>
-	</form>
-
-</div>
-
-<h2>Log in to R Community</h2>
+<%-include('./partials/secondNav.ejs')%>
 
 <p><%= message %></p>
+<div class="homeBody">
+	
+	<form method="POST" action="/auth/login">
+		<fieldset>
+				
+			<small class="Welcome">Enter username and password below</small>
+			<br>
+			<label class="Welcome" for="username">Username:</label>
+			<input type="text" name="username" placeholder="Choose a username">
+		</fieldset>
+		<fieldset>
+			<label class="Welcome" for="username">Password:</label>
+			<input type="password" name="password" placeholder="Choose a password">
+		</fieldset>
+		<br>
+		<div class ='btnDiv'>
+			<button class="btn btn-secondary">Log in</button>
+		</div>
+	</form>
 
-<form method="POST" action="/auth/login">
-	<fieldset>
-		<legend>Enter username and password below</legend>	
-		<label for="username">Username:</label>
-		<input type="text" name="username" placeholder="Choose a username">
-	</fieldset>
-	<fieldset>
-		<label for="username">Password:</label>
-		<input type="password" name="password" placeholder="Choose a password">
-	</fieldset>
-	<button>Log in</button>
-</form>
-
+	
+</div>
 
 <%- include('./partials/footer.ejs') %>

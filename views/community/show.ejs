@@ -1,65 +1,42 @@
 <%-include('../partials/header.ejs')%>
-<div class="homeNav">	
-	<form method="GET" action="/community/new">
-		<button>Create Community</button>
-	</form>
-	<form method="GET" action="/roar/feed">
-		<button>Public Feed</button>
-	</form>
-	<form method="GET" action="/user/<%= userId%>">
-		<button>Profile</button>
-	</form>
-</div>
-<small><%= message %></small>
-
-<h1 class="Welcome">Communities</h1>
+<%- include('../partials/communityNav.ejs')%>
 <div class="container">
-	<%for (let i = 0; i < communities.length; i++) {
-
-		console.log("\nhere is communities[i]");
-		console.log(communities[i]);
-		%>
+	<%for (let i = 0; i < communities.length; i++) {%>
 		<div class="card">
-			<strong><%=communities[i].name%></strong>
-			<p><%=communities[i].description%></p>
-			<small>Created By/ Admin: <%=communities[i].admin.username%></small>
-			<small>Created: <%=communities[i].date.toLocaleString()%></small>
-		<div>
-
-		<%
-			console.log("\n here is communities[i].users");
-			console.log(communities[i].users);
-		%>
-
-		<%
-
-		let userIsMember = false
-		for(let y = 0; y<communities[i].users.length; y++){
-			%>
-			<% if(communities[i].users[y] == loggedInUserId){ %> 
+			<strong class="Welcome"><%=communities[i].name%></strong>
+			<p class="Welcome"><%=communities[i].description%></p>
+			<small class="Welcome">Created By/ Admin: <%=communities[i].admin.username%></small>
+			<small class="Welcome">Created: <%=communities[i].date.toLocaleString()%></small>
+			<div>
+			<%let userIsMember = false%>
+			<% for(let y = 0; y<communities[i].users.length; y++){%>
+				<% if(communities[i].users[y] == loggedInUserId){ %> 
 				<% userIsMember = true%> 
-				<%console.log("else",communities[i].users[y] === loggedInUserId);%>
-			<% } %>
-		<%}%>
-		<%console.log( "current value: ",userIsMember);%>
-		<%if(!userIsMember) {%>
-			<% console.log("heres the c:", communities[i].id);%>
-			<form method="POST" action="/community/join/<%=communities[i]._id%>">
-				<button class="joinBtn">Join</button>	
-			</form>
-		<%} else {
-			console.log("user is member of", communities[i].name);
-			%>
-			<form method="GET" action="/roar/feed/<%=communities[i]._id%>">
-				<button class="joinBtn">View Community Feeds</button>
-				<% console.log("new value:",userIsMember); %>
-			</form>
-		<%}%>
-		</div>
-		</div>
-	<%}%>
+				<% } %>
+				<%}%>
+				<%if(!userIsMember) {%>
+				<form method="POST" action="/community/join/<%=communities[i]._id%>">
+					<button class="btn btn-secondary">Join</button>	
+				</form>
+				<%} else {%>
+					<div class="roar">
 
-	</div>
+						<form method="GET" action="/roar/feed/<%=communities[i]._id%>">
+							<button class="btn btn-secondary">View </button>
+
+						</form>
+					</div>
+					<%}%>
+				</div>
+			</div>
+			<%}%>
 
 
-	<%-include('../partials/footer.ejs')%>
+			</div>
+			<div class="roar">	
+				<form method="GET" action="/community/new">
+					<button class="btn btn-secondary">Create Community</button>
+				</form>
+			</div>
+
+			<%-include('../partials/footer.ejs')%>

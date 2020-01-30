@@ -1,40 +1,35 @@
 <%- include('./partials/header.ejs') %>
+<%-include('./partials/thirdNav.ejs')%>
 
-<div class="homeNav">
 
-	<form method="GET" action="/">
-		<button>Home</button>
-	</form>
-	<form method="GET" action="/auth/login">
-		<button>Login</button>
-	</form>
-
-</div>
-
-<h2>Sign up to join R Community</h2>
 
 <p><%= message %></p>
-
+<div class="homeBody">
 <form method="POST" action="/auth/register">
 	<fieldset>
-		<legend>Choose a username and password below</legend>	
-		<label for="username">Username:</label>
-		<input type="text" name="username" placeholder="Choose a username">
+		<small class="Welcome">Choose a username and password below</small>	
+		<br>
+		<label class="Welcome" for="username">Username:</label>
+		<input class="form-control"type="text" name="username" placeholder="Choose a username">
 	</fieldset>
 	<fieldset>
-		<label for="username">Password:</label>
-		<input type="password" name="password" placeholder="Choose a password">
+		<label class="Welcome"for="username">Password:</label>
+		<input class="form-control"type="password" name="password" placeholder="Choose a password">
 	</fieldset>
 	<fieldset>
-		<label for="firstName">First Name:</label>
-		<input type="text" name="firstName" placeholder="Enter Your First Name">
+		<label class="Welcome" for="firstName">First Name:</label>
+		<input class="form-control"type="text" name="firstName" placeholder="Enter Your First Name">
 	</fieldset>
 	<fieldset>
-		<label for="lastName">Last Name:</label>
-		<input type="text" name="lastName" placeholder="Enter Your Last Name">
+		<label class="Welcome"for="lastName">Last Name:</label>
+		<input class="form-control"type="text" name="lastName" placeholder="Enter Your Last Name">
 	</fieldset>
-	<button>Sign up!</button>
+	<br>
+		<div class ='btnDiv'>
+			
+			<button class="btn btn-secondary">Sign up!</button>
+		</div>
 </form>
-
+</div>
 
 <%- include('./partials/footer.ejs') %>

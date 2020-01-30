@@ -1,29 +1,17 @@
 <%-include('../partials/header.ejs')%>
-<div class="homeNav">
+
+<%-include('../partials/feedsNav.ejs')%>
+
 
 	
-	<form method="GET" action="/auth/logout">
-		<button>Logout</button>
-	</form>
-	<form method="GET" action="/community/show">
-		<button>Community</button>
-	</form>
-	<form method="GET" action="/auth/login">
-		<button>Login</button>
-	</form>
-
-</div>
-
-<h1 class="Welcome">FEED</h1>
-
 <%if(member){%>
 <div class="container">
 	<%communityPost.forEach((communityPost)=>{%>
 	<div class="card">
-		<strong><%=communityPost.title%></strong>
-		<p><%=communityPost.content%></p>
+		<strong class="Welcome"><%=communityPost.title%></strong>>
+		<p class="Welcome"><%=communityPost.content%></p>
 		
-		<small>Created: <%=communityPost.date.toLocaleString()%></small>
+		<small class="Welcome">Created: <%=communityPost.date.toLocaleString()%></small>
 	
 	</div>
 
@@ -32,11 +20,10 @@
 	<div class="container">
 		<%feeds.forEach((feeds)=>{%>
 		<div class="card">
-			<strong><%=feeds.title%></strong>
-			<p><%=feeds.content%></p>
-			
-			<small>Created: <%=feeds.date.toLocaleString()%></small>
-		
+			<strong class="Welcome"><%=feeds.title%></strong>
+			<p class="Welcome"><%=feeds.content%></p>
+	
+			<small class="Welcome">Created: <%=feeds.date.toLocaleString()%></small>
 		</div>
 
 		<%})%>
@@ -46,21 +33,32 @@
 <br>
 
 <% if(!member){%>
-<%console.log("I am not a member");%>
+
 <form method="GET" action="/roar/new">
-		<button>Add roar</button>
+	<div class="roar">
+		<button class="btn btn-secondary">Add roar</button>
+	</div>
 </form>
 <%}else{%>
 	<%if(community == undefined){%>
 		<form method="GET" action="/roar/new">
-			<button>Add roar</button>
+			<button class="btn btn-secondary" id="roar">Add roar</button>
 		</form>
+		
 	<%}else{%>
 	<%console.log("I am a member");%>
 	<form method="GET" action="/roar/new/<%=community%>">
 			<%comunity = undefined%>
-		<button>Add roar</button>
+			<div class="roar">
+				
+				<button class="btn btn-secondary" >Add roar</button>
+				
+			</div>
+	</form>
+	<form method="GET" action="/community/new">
+		<button class="btn btn-secondary">Create Community</button>
 	</form>
 	<%}%>
 <%}%>
+
 <%-include('../partials/footer.ejs')%>

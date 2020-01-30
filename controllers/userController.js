@@ -85,10 +85,11 @@ router.delete('/:id', async (req, res, next) => {
 
 		for(let i = 0; i < userToRemove.communities.length; i++){
 
-			if(req.params.id.toString() == userToRemove.communities[i]){
+			if(req.params.id.toString() == userToRemove.communities[i].toString()){
 				let comToRemove = userToRemove.communities[i]
+				console.log("Commm to leave >>> :" );
 				userToRemove.communities.splice(comToRemove)
-				userToRemove.save()
+				userToRemove.communities.save()
 			}
 		}
 		console.log("after deleting : >>>", userToRemove.communities);
@@ -104,7 +105,7 @@ router.delete('/:id', async (req, res, next) => {
 			if(req.session.userId.toString() == userInCommunity.users.toString()){
 				let communityToRemove = userInCommunity.users[i]
 				userInCommunity.users.splice(communityToRemove)
-				userInCommunity.save()
+				userInCommunity.users.save()
 			}
 		}
 		//const userToRemove =
@@ -113,7 +114,7 @@ router.delete('/:id', async (req, res, next) => {
 		// user.community.id(req.params.communityId).remove()
 		// await user.save()
 		console.log("I End >>>>>>>>>>>>>___________");
-		res.redirect('/user/communityId')
+		res.redirect('/user/:userId')
 	} catch(err) {
 		next(err)
 	}
