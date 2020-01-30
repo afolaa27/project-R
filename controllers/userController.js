@@ -47,7 +47,7 @@ router.get('/', async (req, res, next) => {
 				usersId = users[x]
 				if (user._id.toString() == usersId.toString()){
 					isMember = true
-					memberContainer.push(userCommunity[y]._id)
+					memberContainer.push(userCommunity[y])
 				}
 			}
 		}
