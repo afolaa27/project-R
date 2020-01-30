@@ -128,7 +128,7 @@ router.post('/login', async (req, res, next) => {
 		} else {
 			//if the user does exist 
 			// and the user password is the same as the password typed in
-			const loginInfoIsValid = bcrypt.compareSync(req.body.password, user.password)
+			const loginInfoIsValid = bcrypt.compareSync(req.body.password, currentUser.password)
 
     		if(loginInfoIsValid) {
 				//then the user is logged in 
