@@ -111,6 +111,23 @@ router.post('/join/:id', requireAuth, async (req, res, next) => {
     }
 })
 
+router.delete('/:id', async(req, res, next) => {
+	try{
+	    console.log("to be deleted",req.params.id);
+		Community.findByIdAndRemove(req.params.id, (err, removedCommunity)=>{
+			if(err){
+				next(err)
+			}else{
+
+				res.redirect('/user/:userId')
+			}
+		})
+	  }
+	    catch(err){
+	      next(err)
+	  }
+})
+
 
 
 

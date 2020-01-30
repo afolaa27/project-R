@@ -9,12 +9,24 @@
 </div>
 
 <h1>Profile</h1>
-
-<%  for(let i = 0; i < user.communities.length; i++) { %>
-    <p><%= user.communities[i].name %></p>
-  <form method="POST" action="/user/<%= communities[i] %>?_method=delete">
-		<button>Leave Community</button>
-	</form>
-<% } %>
-
+<div class="container">
+	<%  for(let i = 0; i < user.communities.length; i++) { %>
+	<div class ="card">
+		
+    	<p><%= user.communities[i].name %></p>
+			<%if(both){%>
+				<form >
+				<button href="/community/edit/<%= communities[i]%>">Edit</button>
+				</form>
+				<form method="POST" action="/community/<%= communities[i]._id %>?_method=delete">
+				<button>Delete</button>
+				</form>
+			<%} else if(isMember) {%>
+				<form method="POST" action="/user/<%= communities[i] %>?_method=delete">
+					<button>Leave Community</button>
+				</form>
+			<%}%>
+	</div>
+	<% } %>
+<div>
 <%-include('../partials/footer.ejs')%>

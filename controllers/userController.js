@@ -17,13 +17,15 @@ router.get('/:userId', async (req, res, next) => {
 		let isAdmin = false
 		let isMember = false
 		let memberContainer = []
+		let adminContainer = []
 
 
 		for(let i = 0; i<userCommunity.length; i++){
 
 			if(user._id.toString() == userCommunity[i].admin.toString()){
-				console.log("inside the loop: ", userCommunity[i].admin);
+				console.log("inside the loop: ", userCommunity[i]._id);
 				isAdmin = true
+				adminContainer.push(userCommunity[i])
 			}else{
 				isAdmin = false
 			}
@@ -54,7 +56,8 @@ router.get('/:userId', async (req, res, next) => {
 			communities: memberContainer,
 			isAdmin: isAdmin,
 			isMember : isMember,
-			both: bothAdminAndMember
+			both: bothAdminAndMember,
+			adminOfCommunities : memberContainer
 		})
 	} catch(err) {
 		next(err)
