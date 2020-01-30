@@ -10,12 +10,11 @@
 
 <h1>Profile</h1>
 
-
 <% 
   console.log(communities);
   for(let i = 0; i < user.communities.length; i++) { %>
-    <p><%= user.communities[i]._id %></p>
-  <form method="POST" action="/user/<%= communities[i]._id %>?_method=delete">
+    <p><%= user.communities[i].name %></p>
+  <form method="POST" action="/user/<%= communities[i] %>?_method=delete">
 		<button>Leave Community</button>
 	</form>
 <% } %>
