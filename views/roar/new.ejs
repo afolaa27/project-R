@@ -1,15 +1,18 @@
 <%-include('../partials/header.ejs')%>
 
-<div class="homeNav">
+<div class="navbar navbar-light bg-light">
 
 	
 	<form method="GET" action="/roar/feed">
-		<button>Feed</button>
+		<button class="btn btn-secondary">Feed</button>
 	</form>
+		
+		<h4 class="Welcome" style="color: grey">New Roar</h4>
+	
 
 </div>
 <br>
-<div class="communityForm">
+<div class="homeBody">
 	<%if(!member){%>
 		<form method="POST" action="/roar/new">
 	<%}else{%>
@@ -22,21 +25,21 @@
 	<%}%>
 
 		<div class="form-group">
-			<label for ="title">Title</label>
-			<input type="text" name="title" placeholder="Enter Your Roar Title">
+			<label class="Welcome"for ="title">Title</label>
+			<input class="form-control" type="text" name="title" placeholder="Enter Your Roar Title">
 		</div>
 
 		<div class="form-group">
 			
-		<label for="content"> Content</label>
-		<textarea name="content"></textarea>
+		<label class="Welcome"for="content"> Content</label>
+		<textarea class="form-control" name="content"></textarea>
 		</div>
 		<div class="form-group">
-		<label for="public">public</label>
+		<label class="Welcome"for="public">public</label>
 		<input type="checkbox" name="public">
 		</div>
 
-		<button>Roar</button>
+		<button class="btn btn-secondary">Roar</button>
 	</form>
 
 </div>

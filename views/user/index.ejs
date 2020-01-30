@@ -1,35 +1,38 @@
 <%-include('../partials/header.ejs')%>
-<div class="homeNav">	
+<div class="navbar navbar-light bg-light">	
 	<form method="GET" action="/roar/feed">
-		<button>Feed</button>
+		<button class="btn btn-secondary">Feed</button>
 	</form>
+		<h4 class="Welcome">Profile</h5>
 	<form method="GET" action="/auth/logout">
-		<button>Logout</button>
+		<button class="btn btn-secondary">Logout</button>
 	</form>
 </div>
 
-<h1 class="Welcome">Profile</h1>
 <div class="container">
 	<%  for(let i = 0; i < user.communities.length; i++) { %>
 	<div class ="card">
 		
-    	<p><%= user.communities[i].name %></p>
+    	<p class="Welcome"><%= user.communities[i].name %></p>
+    	<div class="btns">
+    		
 			<%if(both){%>
 				<form method="GET" action="/community/<%= communities[i]._id%>/edit" >
-				<button>Edit</button>
+				<button class="btn btn-secondary">Edit</button>
 				</form>
 				<form method="POST" action="/community/<%= communities[i]._id %>?_method=delete">
-				<button>Delete</button>
+				<button class="btn btn-secondary">Delete</button>
 				</form>
 				<form method="GET" action="/community/<%=communities[i]._id%>/users">
-					<button>View Members</button>
+					<button class="btn btn-secondary">Members</button>
 				</form>
 			<%} else if(isMember) {%>
 				<% console.log("this is the passed id, ",communities[i]._id)%>
 				<form method="POST" action="/user/<%= communities[i]._id%>?_method=delete">
-					<button>Leave Community</button>
+					<button class="btn btn-secondary">Leave Community</button>
 				</form>
 			<%}%>
+    	</div>
 	</div>
 	<% } %>
 <div>

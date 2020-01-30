@@ -1,12 +1,11 @@
 <div class="navbar navbar-light bg-light">	
-	<form method="GET" action="/auth/logout">
-		<button class="btn btn-secondary">Logout</button>
+	
+	<form method="GET" action="/community/show">
+		<button class="btn btn-secondary">Community</button>
 	</form>
 	<h3 class="Welcome">Roars</h3>
 		<div class="multiples">
-			<form method="GET" action="/community/show">
-				<button class="btn btn-secondary">Community</button>
-			</form>
+			
 			<form method="GET" action="/user/<%= userId%>">
 					<button class="btn btn-secondary">Profile</button>
 			</form>

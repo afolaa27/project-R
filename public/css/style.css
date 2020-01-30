@@ -1,5 +1,6 @@
 body {
 	background-color: #007c89;
+
 }
 
 .homeNav{
@@ -79,5 +80,13 @@ p {
 }
 .roar{
 	text-align: center;
+	margin:10px;
 	
+}
+.btns{
+	display: flex;
+	flex-direction: row;
+	flex-flow: flex-end;	
+	justify-content: space-between;		
+	margin:10px;
 }
