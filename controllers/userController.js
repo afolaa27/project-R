@@ -74,12 +74,12 @@ router.delete('/:communityId', async (req, res, next) => {
 		// find user by id (req.session.userId)
 		// remove community from the user.communities array
 		// save
-		const user = await User.findByIdAndRemove(req.params.communityId)
-		console.log(user)
+		const userInCommunity = await User.findById(req.session.userId)
+		console.log('this is the user in community ' + userInCommunity)
 
-		user.community.id(req.params.communityId).remove()
-		await user.save()
-		res.redirect('/user/:id')
+		// user.community.id(req.params.communityId).remove()
+		// await user.save()
+		res.redirect('/user/communityId')
 	} catch(err) {
 		next(err)
 	}
