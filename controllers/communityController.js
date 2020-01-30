@@ -29,7 +29,6 @@ router.post('/new', requireAuth, async (req, res, next)=>{
 			name : title,
 			description : description,
 			zip: zipCode,
-			
 			admin: creator
 		})	
 		res.redirect('/community/show')
