@@ -15,8 +15,8 @@
 		
     	<p><%= user.communities[i].name %></p>
 			<%if(both){%>
-				<form >
-				<button href="/community/edit/<%= communities[i]%>">Edit</button>
+				<form method="GET" action="/community/<%= communities[i]._id%>/edit" >
+				<button>Edit</button>
 				</form>
 				<form method="POST" action="/community/<%= communities[i]._id %>?_method=delete">
 				<button>Delete</button>

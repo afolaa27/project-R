@@ -127,6 +127,35 @@ router.delete('/:id', async(req, res, next) => {
 	      next(err)
 	  }
 })
+router.get('/:id/edit' ,(req, res, next)=>{
+			 		console.log("what im searching, :", req.params.id);
+			 Community.findById(req.params.id, (err, foundCommunity)=>{
+			 	if(err){
+			 		next(err)
+			 	}else{
+			 		console.log("heres what im passing:", foundCommunity);
+			 		res.render('community/edit.ejs', {
+			 			community : foundCommunity
+			 		})
+			 	}
+			 })
+})
+
+router.put('/:id' ,(req, res, next)=>{
+	const communityToUpdate = {}
+	communityToUpdate.name = req.body.communityTitle
+	communityToUpdate.zip = req.body.zipCode
+	communityToUpdate.description = req.body.communityDescription
+
+	Community.findByIdAndUpdate(req.params.id, communityToUpdate, (err, updatedCommunity)=>{
+		if(err){
+			next(err)
+		}else{
+			res.redirect('/community/show')
+		}
+	})
+
+})
 
 
 
