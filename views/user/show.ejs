@@ -1,0 +1,24 @@
+<%-include('../partials/header.ejs')%>
+<div class="homeNav">
+	<form method="GET" action="/user/<%=userId%>">
+		<button>Profile</button>
+	</form>
+</div>
+<h1 class="Welcome">Members</h1>
+<div class="container">
+	<%for(let i =0; i< users.length; i++){%>
+		<div class="card">
+			<p><%=users[i].username%></p>
+			<form >
+				<button>Ban Member</button>
+			</form>
+		</div>
+
+	<%}%>	
+
+</div>
+
+
+
+
+<%-include('../partials/footer.ejs')%>

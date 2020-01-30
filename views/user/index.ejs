@@ -8,7 +8,7 @@
 	</form>
 </div>
 
-<h1>Profile</h1>
+<h1 class="Welcome">Profile</h1>
 <div class="container">
 	<%  for(let i = 0; i < user.communities.length; i++) { %>
 	<div class ="card">
@@ -21,8 +21,12 @@
 				<form method="POST" action="/community/<%= communities[i]._id %>?_method=delete">
 				<button>Delete</button>
 				</form>
+				<form method="GET" action="/community/<%=communities[i]._id%>/users">
+					<button>View Members</button>
+				</form>
 			<%} else if(isMember) {%>
-				<form method="POST" action="/user/<%= communities[i] %>?_method=delete">
+				<% console.log("this is the passed id, ",communities[i]._id)%>
+				<form method="POST" action="/user/<%= communities[i]._id%>?_method=delete">
 					<button>Leave Community</button>
 				</form>
 			<%}%>

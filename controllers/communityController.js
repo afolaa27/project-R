@@ -110,6 +110,12 @@ router.post('/join/:id', requireAuth, async (req, res, next) => {
         next(err)
     }
 })
+router.get('/:id/users',  async(req, res, next) => {
+	const community = await Community.findById(req.params.id).populate('users')
+
+	console.log("users Are sent in as >>>>", community.users);
+	res.render('user/show.ejs', {users : community.users, userId : req.session.userId})
+})
 
 router.delete('/:id', async(req, res, next) => {
 	try{
@@ -127,6 +133,7 @@ router.delete('/:id', async(req, res, next) => {
 	      next(err)
 	  }
 })
+
 router.get('/:id/edit' ,(req, res, next)=>{
 			 		console.log("what im searching, :", req.params.id);
 			 Community.findById(req.params.id, (err, foundCommunity)=>{

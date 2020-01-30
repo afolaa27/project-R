@@ -70,18 +70,49 @@ router.get('/:userId', async (req, res, next) => {
 
 //destroy route
 //leave the community 
-router.delete('/:communityId', async (req, res, next) => {
+router.delete('/:id', async (req, res, next) => {
 //  /user/5e313dad6067360c1ea85741
 
 	try {
 		// find user by id (req.session.userId)
 		// remove community from the user.communities array
 		// save
-		const userInCommunity = await User.findById(req.session.userId)
-		console.log('this is the user in community ' + userInCommunity)
+
+		console.log("I Start >>>>>>>>>>>>>___________");
+		const userToRemove = await User.findById(req.session.userId)
+
+		console.log("this is the users communities: >>>>>>>", userToRemove.communities);
+
+		for(let i = 0; i < userToRemove.communities.length; i++){
+
+			if(req.params.id.toString() == userToRemove.communities[i]){
+				let comToRemove = userToRemove.communities[i]
+				userToRemove.communities.splice(comToRemove)
+				userToRemove.save()
+			}
+		}
+		console.log("after deleting : >>>", userToRemove.communities);
+
+
+
+		console.log("the com id : >>>>>", req.params.id);
+		const userInCommunity = await Community.findById(req.params.id)
+		console.log('this is the communities users >>>>>> ' + userInCommunity.users)
+
+
+		for(let y = 0; y <userInCommunity.users; y++){
+			if(req.session.userId.toString() == userInCommunity.users.toString()){
+				let communityToRemove = userInCommunity.users[i]
+				userInCommunity.users.splice(communityToRemove)
+				userInCommunity.save()
+			}
+		}
+		//const userToRemove =
+
 
 		// user.community.id(req.params.communityId).remove()
 		// await user.save()
+		console.log("I End >>>>>>>>>>>>>___________");
 		res.redirect('/user/communityId')
 	} catch(err) {
 		next(err)
