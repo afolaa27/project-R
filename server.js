@@ -12,6 +12,7 @@ require('./db/db.js')
 //middleware
 server.use(express.static('public'))
 server.use(bodyParser.urlencoded({ extended: false }))
+server.use(methodOverride('_method'))
 
 //session data
 server.use(session({

@@ -8,7 +8,7 @@ const Roar = require('../models/roar')
 //we need the userId to be able to see their profile 
 //their profile should have all of their communities
 
-router.get('/', async (req, res, next) => {
+router.get('/:userId', async (req, res, next) => {
 	try {
 
 		const user = await User.findById(req.session.userId).populate('communities')
@@ -67,11 +67,19 @@ router.get('/', async (req, res, next) => {
 
 //destroy route
 //leave the community 
-router.delete('/:id', async (req, res, next) => {
-	try {
-		await User.findByIdAndRemove(req.params.id)
+router.delete('/:communityId', async (req, res, next) => {
+//  /user/5e313dad6067360c1ea85741
 
-		res.redirect('/user/index.ejs')
+	try {
+		// find user by id (req.session.userId)
+		// remove community from the user.communities array
+		// save
+		const user = await User.findByIdAndRemove(req.params.communityId)
+		console.log(user)
+
+		user.community.id(req.params.communityId).remove()
+		await user.save()
+		res.redirect('/user/:id')
 	} catch(err) {
 		next(err)
 	}
