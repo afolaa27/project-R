@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 const User = require('../models/user')
 const Roar = require('../models/roar')
+const bcrypt = require('bcrypt')
+
 //registration 
 //GET /register
 router.get('/register', async (req, res, next) => {
@@ -54,9 +56,14 @@ router.post('/register', async (req, res, next) => {
             // the user
         } else {
 
+        	//encrypt the password
+        	const salt = bcrypt.genSaltSync(10)
+    		const hashedPassword = bcrypt.hashSync(requestedPassword, salt)
+
+
             const newUser = await User.create({
                 username: requestedUsername,
-                password: requestedPassword
+                password: hashedPassword
             })
 
             //they must be logged in to the session
@@ -121,7 +128,9 @@ router.post('/login', async (req, res, next) => {
 		} else {
 			//if the user does exist 
 			// and the user password is the same as the password typed in
-			if(currentUser.password == req.body.password) {
+			const loginInfoIsValid = bcrypt.compareSync(req.body.password, currentUser.password)
+
+    		if(loginInfoIsValid) {
 				//then the user is logged in 
 				req.session.loggedIn = true
 				//the user is the same as the userId

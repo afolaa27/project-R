@@ -8,29 +8,18 @@ const Roar = require('../models/roar')
 //we need the userId to be able to see their profile 
 //their profile should have all of their communities
 
-router.get('/', async (req, res, next) => {
+router.get('/:userId', async (req, res, next) => {
 	try {
 
-		const user = await User.findById(req.session.userId)
-		const userCommunity = await Community.find({}).populate('community').populate('user')
-		console.log("this is user that wants to UD:",user._id)
-		console.log("THIS IS MY COMM : ",userCommunity)
-		console.log("I STOP HERE")
+		const user = await User.findById(req.session.userId).populate('communities')
+		const userCommunity = await Community.find({}).populate('user')
+	
 		let isAdmin = false
 		let isMember = false
 		let memberContainer = []
 
-		console.log("Number of users in this community",userCommunity.length);
-		console.log("I End Here");
-
 
 		for(let i = 0; i<userCommunity.length; i++){
-
-			console.log(`the admin: ${userCommunity[i].admin} is a ${typeof userCommunity[i].admin }`);
-			console.log(`the user._id: ${user._id} is a ${typeof user._id }`);
-			
-			console.log("EXPRESSION>>> 1", user._id == userCommunity[i].admin);
-
 
 			if(user._id.toString() == userCommunity[i].admin.toString()){
 				console.log("inside the loop: ", userCommunity[i].admin);
@@ -73,13 +62,24 @@ router.get('/', async (req, res, next) => {
 })
 
 
+
+
+
 //destroy route
 //leave the community 
-router.delete('/:id', async (req, res, next) => {
-	try {
-		await User.findByIdAndRemove(req.params.id)
+router.delete('/:communityId', async (req, res, next) => {
+//  /user/5e313dad6067360c1ea85741
 
-		res.redirect('/user/index.ejs')
+	try {
+		// find user by id (req.session.userId)
+		// remove community from the user.communities array
+		// save
+		const userInCommunity = await User.findById(req.session.userId)
+		console.log('this is the user in community ' + userInCommunity)
+
+		// user.community.id(req.params.communityId).remove()
+		// await user.save()
+		res.redirect('/user/communityId')
 	} catch(err) {
 		next(err)
 	}
